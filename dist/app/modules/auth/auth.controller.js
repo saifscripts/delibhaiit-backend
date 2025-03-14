@@ -38,13 +38,13 @@ const login = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, 
     res.cookie('auth_token', authToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        // sameSite: 'strict',
         // maxAge: 3600000, // 1 hour
         maxAge: 60 * 1000, // 1 min
     }).cookie('refresh_token', refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
+        // sameSite: 'strict',
         maxAge: 604800000, // 7d
     });
     (0, sendResponse_1.default)(res, result);
