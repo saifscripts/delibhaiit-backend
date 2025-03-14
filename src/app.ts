@@ -12,8 +12,6 @@ const app = express();
 const corsOptions = {
     origin: [config.client_base_url as string],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['Set-Cookie'],
 };
 
 // parsers
