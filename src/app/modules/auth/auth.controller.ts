@@ -10,20 +10,11 @@ const register = catchAsync(async (req, res) => {
 
 // Route: /api/v1/auth/login (POST)
 const login = catchAsync(async (req, res) => {
-    const { authToken, refreshToken, ...result } = await AuthServices.login(
-        req.body,
-    );
+    const { refreshToken, ...result } = await AuthServices.login(req.body);
 
-    res.cookie('auth_token', authToken, {
+    res.cookie('refresh_token', refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        // sameSite: 'strict',
-        // maxAge: 3600000, // 1 hour
-        maxAge: 60 * 1000, // 1 min
-    }).cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        // sameSite: 'strict',
         maxAge: 604800000, // 7d
     });
 

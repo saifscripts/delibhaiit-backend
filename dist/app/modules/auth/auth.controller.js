@@ -34,17 +34,10 @@ const register = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 
 }));
 // Route: /api/v1/auth/login (POST)
 const login = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const _a = yield auth_service_1.AuthServices.login(req.body), { authToken, refreshToken } = _a, result = __rest(_a, ["authToken", "refreshToken"]);
-    res.cookie('auth_token', authToken, {
+    const _a = yield auth_service_1.AuthServices.login(req.body), { refreshToken } = _a, result = __rest(_a, ["refreshToken"]);
+    res.cookie('refresh_token', refreshToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        // sameSite: 'strict',
-        // maxAge: 3600000, // 1 hour
-        maxAge: 60 * 1000, // 1 min
-    }).cookie('refresh_token', refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        // sameSite: 'strict',
         maxAge: 604800000, // 7d
     });
     (0, sendResponse_1.default)(res, result);

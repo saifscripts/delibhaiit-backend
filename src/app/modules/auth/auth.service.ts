@@ -114,7 +114,7 @@ const login = async (payload: ILoginCredentials) => {
     return {
         statusCode: httpStatus.OK,
         message: 'User logged in successfully',
-        authToken,
+        token: authToken,
         refreshToken,
         // data: user,
         data: null,

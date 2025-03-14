@@ -15,6 +15,8 @@ const app = (0, express_1.default)();
 const corsOptions = {
     origin: [config_1.default.client_base_url],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['Set-Cookie'],
 };
 // parsers
 app.use((0, cors_1.default)(corsOptions));
