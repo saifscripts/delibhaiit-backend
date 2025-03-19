@@ -107,75 +107,26 @@ const getSingleStudent = async (certificateId: string) => {
 //     };
 // };
 
-// const deleteStudent = async (
-//     postId: string,
-//     authorId: mongoose.Types.ObjectId, // retrieved from token
-// ) => {
-//     const post = await Post.findById(postId);
+const deleteStudent = async (studentId: string) => {
+    const deletedStudent = await Student.findByIdAndDelete(studentId, {
+        new: true,
+    });
 
-//     if (!post) {
-//         throw new AppError(httpStatus.NOT_FOUND, 'Post not found!');
-//     }
+    if (!deletedStudent) {
+        throw new AppError(httpStatus.NOT_FOUND, 'Student not found!');
+    }
 
-//     if (post.author.toString() !== authorId.toString()) {
-//         throw new AppError(
-//             httpStatus.UNAUTHORIZED,
-//             'You are not authorized to delete this post!',
-//         );
-//     }
-
-//     const session = await mongoose.startSession();
-
-//     try {
-//         session.startTransaction();
-
-//         // delete post from db
-//         const deletedPost = await Post.findOneAndUpdate(
-//             { _id: postId, author: authorId },
-//             { isDeleted: true },
-//             { new: true, session },
-//         );
-
-//         if (!deletedPost) {
-//             throw new AppError(httpStatus.NOT_FOUND, 'Post not found!');
-//         }
-
-//         // removed post id from author's posts
-//         const updatedUser = await User.findByIdAndUpdate(
-//             authorId,
-//             {
-//                 $pull: { posts: postId },
-//             },
-//             { session },
-//         );
-
-//         if (!updatedUser) {
-//             throw new AppError(
-//                 httpStatus.INTERNAL_SERVER_ERROR,
-//                 'Failed to delete post!',
-//             );
-//         }
-
-//         // commit transaction and end session
-//         await session.commitTransaction();
-//         await session.endSession();
-
-//         return {
-//             statusCode: httpStatus.OK,
-//             message: 'Post deleted successfully!',
-//             data: deletedPost,
-//         };
-//     } catch (error) {
-//         await session.abortTransaction();
-//         await session.endSession();
-//         throw error;
-//     }
-// };
+    return {
+        statusCode: httpStatus.OK,
+        message: 'Post deleted successfully!',
+        data: null,
+    };
+};
 
 export const StudentServices = {
     createStudent,
     getStudents,
     getSingleStudent,
     // updateStudent,
-    // deleteStudent,
+    deleteStudent,
 };

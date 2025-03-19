@@ -34,18 +34,15 @@ const getSingleStudent = catchAsync(async (req, res) => {
 // });
 
 // Route: /api/v1/students/:id (DELETE)
-// const deleteStudent = catchAsync(async (req, res) => {
-//     const result = await StudentServices.deletePostFromDB(
-//         req.params.id,
-//         req.user._id,
-//     );
-//     sendResponse(res, result);
-// });
+const deleteStudent = catchAsync(async (req, res) => {
+    const result = await StudentServices.deleteStudent(req.params.id);
+    sendResponse(res, result);
+});
 
 export const StudentControllers = {
     createStudent,
     getStudents,
     getSingleStudent,
     // updateStudent,
-    // deleteStudent,
+    deleteStudent,
 };

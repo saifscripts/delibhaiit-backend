@@ -1,5 +1,7 @@
 import express from 'express';
+import auth from '../../middlewares/auth';
 import validateRequest from '../../middlewares/validateRequest';
+import { USER_ROLE } from '../user/user.constant';
 import { StudentControllers } from './student.controller';
 import { StudentValidations } from './student.validation';
 
@@ -23,5 +25,9 @@ router.route('/:certificateId').get(StudentControllers.getSingleStudent);
 //     auth(USER_ROLE.ADMIN, USER_ROLE.USER),
 //     StudentControllers.deletePost,
 // );
+
+router
+    .route('/:id')
+    .delete(auth(USER_ROLE.ADMIN), StudentControllers.deleteStudent);
 
 export const StudentRoutes = router;

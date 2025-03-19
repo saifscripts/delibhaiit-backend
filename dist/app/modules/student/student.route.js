@@ -5,7 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentRoutes = void 0;
 const express_1 = __importDefault(require("express"));
+const auth_1 = __importDefault(require("../../middlewares/auth"));
 const validateRequest_1 = __importDefault(require("../../middlewares/validateRequest"));
+const user_constant_1 = require("../user/user.constant");
 const student_controller_1 = require("./student.controller");
 const student_validation_1 = require("./student.validation");
 const router = express_1.default.Router();
@@ -24,4 +26,7 @@ router.route('/:certificateId').get(student_controller_1.StudentControllers.getS
 //     auth(USER_ROLE.ADMIN, USER_ROLE.USER),
 //     StudentControllers.deletePost,
 // );
+router
+    .route('/:id')
+    .delete((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), student_controller_1.StudentControllers.deleteStudent);
 exports.StudentRoutes = router;
