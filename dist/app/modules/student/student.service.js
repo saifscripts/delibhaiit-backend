@@ -105,8 +105,8 @@ const deleteStudent = (studentId) => __awaiter(void 0, void 0, void 0, function*
     }
     return {
         statusCode: http_status_1.default.OK,
-        message: 'Post deleted successfully!',
-        data: null,
+        message: 'Student deleted successfully!',
+        data: deletedStudent,
     };
 });
 exports.StudentServices = {
