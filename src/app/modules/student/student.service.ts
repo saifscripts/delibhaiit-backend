@@ -118,8 +118,8 @@ const deleteStudent = async (studentId: string) => {
 
     return {
         statusCode: httpStatus.OK,
-        message: 'Post deleted successfully!',
-        data: null,
+        message: 'Student deleted successfully!',
+        data: deletedStudent,
     };
 };
 
