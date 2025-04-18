@@ -59,43 +59,19 @@ const getSingleStudent = (certificateId) => __awaiter(void 0, void 0, void 0, fu
         data: student,
     };
 });
-// const updateStudent = async (
-//     postId: string,
-//     authorId: mongoose.Types.ObjectId, // retrieved from token
-//     payload: Partial<IPost>,
-//     featuredImage: Express.Multer.File,
-// ) => {
-//     const post = await Post.findById(postId);
-//     if (!post) {
-//         throw new AppError(httpStatus.NOT_FOUND, 'Post not found!');
-//     }
-//     if (post.author.toString() !== authorId.toString()) {
-//         throw new AppError(
-//             httpStatus.UNAUTHORIZED,
-//             'You are not authorized to update this post!',
-//         );
-//     }
-//     if (!featuredImage?.path && payload?.featuredImage === undefined) {
-//         // no image to update (this will preserve old image)
-//         payload.featuredImage = undefined;
-//     } else {
-//         // received new image (this will replace old image)
-//         payload.featuredImage = payload.featuredImage || featuredImage?.path;
-//     }
-//     const updatedPost = await Post.findOneAndUpdate(
-//         { _id: postId, author: authorId },
-//         payload,
-//         { new: true },
-//     );
-//     if (!updatedPost) {
-//         throw new AppError(httpStatus.NOT_FOUND, 'Post not found!');
-//     }
-//     return {
-//         statusCode: httpStatus.OK,
-//         message: 'Post updated successfully!',
-//         data: updatedPost,
-//     };
-// };
+const updateStudent = (studentId, payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const updatedStudent = yield student_model_1.Student.findByIdAndUpdate(studentId, payload, {
+        new: true,
+    });
+    if (!updatedStudent) {
+        throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'Student not found!');
+    }
+    return {
+        statusCode: http_status_1.default.OK,
+        message: 'Student updated successfully!',
+        data: updatedStudent,
+    };
+});
 const deleteStudent = (studentId) => __awaiter(void 0, void 0, void 0, function* () {
     const deletedStudent = yield student_model_1.Student.findByIdAndDelete(studentId, {
         new: true,
@@ -113,6 +89,6 @@ exports.StudentServices = {
     createStudent,
     getStudents,
     getSingleStudent,
-    // updateStudent,
+    updateStudent,
     deleteStudent,
 };

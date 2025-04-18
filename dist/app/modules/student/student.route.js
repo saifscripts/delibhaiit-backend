@@ -28,5 +28,6 @@ router.route('/:certificateId').get(student_controller_1.StudentControllers.getS
 // );
 router
     .route('/:id')
-    .delete((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), student_controller_1.StudentControllers.deleteStudent);
+    .delete((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), student_controller_1.StudentControllers.deleteStudent)
+    .put((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), (0, validateRequest_1.default)(student_validation_1.StudentValidations.updateStudentValidationSchema), student_controller_1.StudentControllers.updateStudent);
 exports.StudentRoutes = router;
