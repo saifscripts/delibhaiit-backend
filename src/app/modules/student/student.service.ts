@@ -63,49 +63,21 @@ const getSingleStudent = async (certificateId: string) => {
     };
 };
 
-// const updateStudent = async (
-//     postId: string,
-//     authorId: mongoose.Types.ObjectId, // retrieved from token
-//     payload: Partial<IPost>,
-//     featuredImage: Express.Multer.File,
-// ) => {
-//     const post = await Post.findById(postId);
+const updateStudent = async (studentId: string, payload: Partial<IStudent>) => {
+    const updatedStudent = await Student.findByIdAndUpdate(studentId, payload, {
+        new: true,
+    });
 
-//     if (!post) {
-//         throw new AppError(httpStatus.NOT_FOUND, 'Post not found!');
-//     }
+    if (!updatedStudent) {
+        throw new AppError(httpStatus.NOT_FOUND, 'Student not found!');
+    }
 
-//     if (post.author.toString() !== authorId.toString()) {
-//         throw new AppError(
-//             httpStatus.UNAUTHORIZED,
-//             'You are not authorized to update this post!',
-//         );
-//     }
-
-//     if (!featuredImage?.path && payload?.featuredImage === undefined) {
-//         // no image to update (this will preserve old image)
-//         payload.featuredImage = undefined;
-//     } else {
-//         // received new image (this will replace old image)
-//         payload.featuredImage = payload.featuredImage || featuredImage?.path;
-//     }
-
-//     const updatedPost = await Post.findOneAndUpdate(
-//         { _id: postId, author: authorId },
-//         payload,
-//         { new: true },
-//     );
-
-//     if (!updatedPost) {
-//         throw new AppError(httpStatus.NOT_FOUND, 'Post not found!');
-//     }
-
-//     return {
-//         statusCode: httpStatus.OK,
-//         message: 'Post updated successfully!',
-//         data: updatedPost,
-//     };
-// };
+    return {
+        statusCode: httpStatus.OK,
+        message: 'Student updated successfully!',
+        data: updatedStudent,
+    };
+};
 
 const deleteStudent = async (studentId: string) => {
     const deletedStudent = await Student.findByIdAndDelete(studentId, {
@@ -127,6 +99,6 @@ export const StudentServices = {
     createStudent,
     getStudents,
     getSingleStudent,
-    // updateStudent,
+    updateStudent,
     deleteStudent,
 };

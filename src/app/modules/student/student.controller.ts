@@ -23,15 +23,10 @@ const getSingleStudent = catchAsync(async (req, res) => {
 });
 
 // Route: /api/v1/students/:id (PUT)
-// const updateStudent = catchAsync(async (req, res) => {
-//     const result = await StudentServices.updatePostIntoDB(
-//         req.params.id,
-//         req.user._id,
-//         req.body,
-//         req.file as Express.Multer.File,
-//     );
-//     sendResponse(res, result);
-// });
+const updateStudent = catchAsync(async (req, res) => {
+    const result = await StudentServices.updateStudent(req.params.id, req.body);
+    sendResponse(res, result);
+});
 
 // Route: /api/v1/students/:id (DELETE)
 const deleteStudent = catchAsync(async (req, res) => {
@@ -43,6 +38,6 @@ export const StudentControllers = {
     createStudent,
     getStudents,
     getSingleStudent,
-    // updateStudent,
+    updateStudent,
     deleteStudent,
 };
