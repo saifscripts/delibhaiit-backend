@@ -22,29 +22,22 @@ const catchAsync_1 = __importDefault(require("../utils/catchAsync"));
 const auth = (...authorizedRoles) => {
     return (0, catchAsync_1.default)((req, _res, next) => __awaiter(void 0, void 0, void 0, function* () {
         var _a;
-        // get the token from the auth header
         const token = (_a = req.cookies) === null || _a === void 0 ? void 0 : _a.auth_token;
-        // check if there is a token
         if (!token) {
             throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'You are not authorized!');
         }
-        // decode the token
         const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
         const { _id } = decoded;
         const user = yield user_model_1.User.findById(_id);
-        // check if user exists
         if (!user) {
             throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'User not found!');
         }
-        // check if the user is deleted
         if (user.isDeleted) {
             throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'User not found!');
         }
-        // check if the user is blocked
         if (user.status === user_constant_1.USER_STATUS.BLOCKED) {
             throw new AppError_1.default(http_status_1.default.BAD_REQUEST, 'User is blocked!');
         }
-        // check if the user is authorized
         if (authorizedRoles && !authorizedRoles.includes(user.role)) {
             throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'You are not authorized!');
         }
