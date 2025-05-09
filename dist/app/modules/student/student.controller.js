@@ -18,7 +18,8 @@ const sendResponse_1 = __importDefault(require("../../utils/sendResponse"));
 const student_service_1 = require("./student.service");
 // Route: /api/v1/students/ (POST)
 const createStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield student_service_1.StudentServices.createStudent(req.body);
+    var _a, _b;
+    const result = yield student_service_1.StudentServices.createStudent(req.body, !((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) ? '' : (_b = req.file) === null || _b === void 0 ? void 0 : _b.path);
     (0, sendResponse_1.default)(res, result);
 }));
 // Route: /api/v1/students/ (GET)

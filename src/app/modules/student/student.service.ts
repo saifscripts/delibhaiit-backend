@@ -6,9 +6,10 @@ import { StudentSearchableFields } from './student.constant';
 import { IStudent } from './student.interface';
 import { Student } from './student.model';
 
-const createStudent = async (payload: IStudent) => {
+const createStudent = async (payload: IStudent, photo: string) => {
     const newStudent = await Student.create({
         ...payload,
+        photo,
         certificateId: `DIT${generateRandomNumber(6)}`,
     });
 

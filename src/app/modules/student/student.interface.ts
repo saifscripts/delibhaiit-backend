@@ -9,6 +9,7 @@ export interface IStudent {
     // course: string;
     startDate: Date;
     completionDate: Date;
+    photo: string;
     // profileImage?: string; // Optional profile picture URL
     // skills: string[]; // List of skills
     // projects: Project[]; // List of projects

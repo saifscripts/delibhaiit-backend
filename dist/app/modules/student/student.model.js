@@ -7,6 +7,7 @@ const StudentSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
     startDate: { type: Date, required: true },
     completionDate: { type: Date, required: true },
+    photo: { type: String, required: true },
     isDeleted: { type: Boolean, default: false },
 }, {
     timestamps: true,

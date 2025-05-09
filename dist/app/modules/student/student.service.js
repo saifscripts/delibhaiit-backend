@@ -19,8 +19,8 @@ const AppError_1 = __importDefault(require("../../errors/AppError"));
 const generateRandomNumber_1 = require("../../utils/generateRandomNumber");
 const student_constant_1 = require("./student.constant");
 const student_model_1 = require("./student.model");
-const createStudent = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const newStudent = yield student_model_1.Student.create(Object.assign(Object.assign({}, payload), { certificateId: `DIT${(0, generateRandomNumber_1.generateRandomNumber)(6)}` }));
+const createStudent = (payload, photo) => __awaiter(void 0, void 0, void 0, function* () {
+    const newStudent = yield student_model_1.Student.create(Object.assign(Object.assign({}, payload), { photo, certificateId: `DIT${(0, generateRandomNumber_1.generateRandomNumber)(6)}` }));
     if (!newStudent) {
         throw new AppError_1.default(http_status_1.default.INTERNAL_SERVER_ERROR, 'Failed to create student!');
     }

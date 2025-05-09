@@ -4,7 +4,10 @@ import { StudentServices } from './student.service';
 
 // Route: /api/v1/students/ (POST)
 const createStudent = catchAsync(async (req, res) => {
-    const result = await StudentServices.createStudent(req.body);
+    const result = await StudentServices.createStudent(
+        req.body,
+        !req.file?.path ? '' : req.file?.path,
+    );
     sendResponse(res, result);
 });
 
