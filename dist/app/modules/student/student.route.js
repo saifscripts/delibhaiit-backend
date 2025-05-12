@@ -12,9 +12,10 @@ const user_constant_1 = require("../user/user.constant");
 const student_controller_1 = require("./student.controller");
 const student_validation_1 = require("./student.validation");
 const router = express_1.default.Router();
-router.route('/').get(student_controller_1.StudentControllers.getStudents).post(
-// auth(USER_ROLE.ADMIN, USER_ROLE.USER),
-upload_1.upload.single('photo'), (0, validateRequest_1.default)(student_validation_1.StudentValidations.createStudentValidationSchema), student_controller_1.StudentControllers.createStudent);
+router
+    .route('/')
+    .get(student_controller_1.StudentControllers.getStudents)
+    .post((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), upload_1.upload.single('photo'), (0, validateRequest_1.default)(student_validation_1.StudentValidations.createStudentValidationSchema), student_controller_1.StudentControllers.createStudent);
 router.route('/:certificateId').get(student_controller_1.StudentControllers.getSingleStudent);
 // .put(
 //     auth(USER_ROLE.ADMIN, USER_ROLE.USER),
@@ -29,7 +30,5 @@ router.route('/:certificateId').get(student_controller_1.StudentControllers.getS
 router
     .route('/:id')
     .delete((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), student_controller_1.StudentControllers.deleteStudent)
-    .put(
-// auth(USER_ROLE.ADMIN),
-upload_1.upload.single('photo'), (0, validateRequest_1.default)(student_validation_1.StudentValidations.updateStudentValidationSchema), student_controller_1.StudentControllers.updateStudent);
+    .put((0, auth_1.default)(user_constant_1.USER_ROLE.ADMIN), upload_1.upload.single('photo'), (0, validateRequest_1.default)(student_validation_1.StudentValidations.updateStudentValidationSchema), student_controller_1.StudentControllers.updateStudent);
 exports.StudentRoutes = router;

@@ -8,12 +8,15 @@ import { StudentValidations } from './student.validation';
 
 const router = express.Router();
 
-router.route('/').get(StudentControllers.getStudents).post(
-    // auth(USER_ROLE.ADMIN, USER_ROLE.USER),
-    upload.single('photo'),
-    validateRequest(StudentValidations.createStudentValidationSchema),
-    StudentControllers.createStudent,
-);
+router
+    .route('/')
+    .get(StudentControllers.getStudents)
+    .post(
+        auth(USER_ROLE.ADMIN),
+        upload.single('photo'),
+        validateRequest(StudentValidations.createStudentValidationSchema),
+        StudentControllers.createStudent,
+    );
 
 router.route('/:certificateId').get(StudentControllers.getSingleStudent);
 // .put(
@@ -31,7 +34,7 @@ router
     .route('/:id')
     .delete(auth(USER_ROLE.ADMIN), StudentControllers.deleteStudent)
     .put(
-        // auth(USER_ROLE.ADMIN),
+        auth(USER_ROLE.ADMIN),
         upload.single('photo'),
         validateRequest(StudentValidations.updateStudentValidationSchema),
         StudentControllers.updateStudent,
