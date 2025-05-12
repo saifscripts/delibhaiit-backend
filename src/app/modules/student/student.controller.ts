@@ -6,7 +6,7 @@ import { StudentServices } from './student.service';
 const createStudent = catchAsync(async (req, res) => {
     const result = await StudentServices.createStudent(
         req.body,
-        !req.file?.path ? '' : req.file?.path,
+        req.file?.path ? req.file?.path : '',
     );
     sendResponse(res, result);
 });
@@ -27,7 +27,11 @@ const getSingleStudent = catchAsync(async (req, res) => {
 
 // Route: /api/v1/students/:id (PUT)
 const updateStudent = catchAsync(async (req, res) => {
-    const result = await StudentServices.updateStudent(req.params.id, req.body);
+    const result = await StudentServices.updateStudent(
+        req.params.id,
+        req.body,
+        req.file?.path ? req.file?.path : undefined,
+    );
     sendResponse(res, result);
 });
 

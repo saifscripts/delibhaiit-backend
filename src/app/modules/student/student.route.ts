@@ -31,7 +31,8 @@ router
     .route('/:id')
     .delete(auth(USER_ROLE.ADMIN), StudentControllers.deleteStudent)
     .put(
-        auth(USER_ROLE.ADMIN),
+        // auth(USER_ROLE.ADMIN),
+        upload.single('photo'),
         validateRequest(StudentValidations.updateStudentValidationSchema),
         StudentControllers.updateStudent,
     );

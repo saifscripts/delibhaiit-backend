@@ -17,6 +17,7 @@ const updateStudentValidationSchema = zod_1.z.object({
             .optional(),
         startDate: zod_1.z.coerce.date().optional(),
         completionDate: zod_1.z.coerce.date().optional(),
+        photo: zod_1.z.string().optional(),
     }),
 });
 exports.StudentValidations = {

@@ -64,10 +64,18 @@ const getSingleStudent = async (certificateId: string) => {
     };
 };
 
-const updateStudent = async (studentId: string, payload: Partial<IStudent>) => {
-    const updatedStudent = await Student.findByIdAndUpdate(studentId, payload, {
-        new: true,
-    });
+const updateStudent = async (
+    studentId: string,
+    payload: Partial<IStudent>,
+    photo?: string,
+) => {
+    const updatedStudent = await Student.findByIdAndUpdate(
+        studentId,
+        { photo, ...payload },
+        {
+            new: true,
+        },
+    );
 
     if (!updatedStudent) {
         throw new AppError(httpStatus.NOT_FOUND, 'Student not found!');

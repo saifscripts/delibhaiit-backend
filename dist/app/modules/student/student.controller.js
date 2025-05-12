@@ -19,7 +19,7 @@ const student_service_1 = require("./student.service");
 // Route: /api/v1/students/ (POST)
 const createStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
-    const result = yield student_service_1.StudentServices.createStudent(req.body, !((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) ? '' : (_b = req.file) === null || _b === void 0 ? void 0 : _b.path);
+    const result = yield student_service_1.StudentServices.createStudent(req.body, ((_a = req.file) === null || _a === void 0 ? void 0 : _a.path) ? (_b = req.file) === null || _b === void 0 ? void 0 : _b.path : '');
     (0, sendResponse_1.default)(res, result);
 }));
 // Route: /api/v1/students/ (GET)
@@ -34,7 +34,8 @@ const getSingleStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 
 }));
 // Route: /api/v1/students/:id (PUT)
 const updateStudent = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield student_service_1.StudentServices.updateStudent(req.params.id, req.body);
+    var _c, _d;
+    const result = yield student_service_1.StudentServices.updateStudent(req.params.id, req.body, ((_c = req.file) === null || _c === void 0 ? void 0 : _c.path) ? (_d = req.file) === null || _d === void 0 ? void 0 : _d.path : undefined);
     (0, sendResponse_1.default)(res, result);
 }));
 // Route: /api/v1/students/:id (DELETE)

@@ -59,8 +59,8 @@ const getSingleStudent = (certificateId) => __awaiter(void 0, void 0, void 0, fu
         data: student,
     };
 });
-const updateStudent = (studentId, payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const updatedStudent = yield student_model_1.Student.findByIdAndUpdate(studentId, payload, {
+const updateStudent = (studentId, payload, photo) => __awaiter(void 0, void 0, void 0, function* () {
+    const updatedStudent = yield student_model_1.Student.findByIdAndUpdate(studentId, Object.assign({ photo }, payload), {
         new: true,
     });
     if (!updatedStudent) {

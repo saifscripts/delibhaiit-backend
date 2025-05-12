@@ -16,6 +16,7 @@ const updateStudentValidationSchema = z.object({
             .optional(),
         startDate: z.coerce.date().optional(),
         completionDate: z.coerce.date().optional(),
+        photo: z.string().optional(),
     }),
 });
 
